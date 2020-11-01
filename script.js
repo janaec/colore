@@ -5,6 +5,8 @@ var cityName= $("#cityName");
 var uvIndex= $("#uvIndex");
 var windSpeed= $("#windspeed");
 var temperature= $("#temperature");
+var latitude= oneDayData.coord.lat;
+var longitude= oneDayData.coord.lon;
 // establishing on clicks
 $(document).ready(function(){
     getSearches();
@@ -21,7 +23,12 @@ $(document).ready(function(){
             url: URL,
             method: "GET"
         }).then(function(oneDayData){
-            
+            var queryUV= "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude +apiKey;
+            $.ajax({
+                url: fivedayForecast,
+                method: "GET",
+                
+            })
         }
     }
 })
