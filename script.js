@@ -14,7 +14,15 @@ $(document).ready(function(){
 
     function startSearch() {
         var cityName= search.val();
-        var URL = "api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+        var URL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
+        var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey; 
+
+        $.ajax({
+            url: URL,
+            method: "GET"
+        }).then(function(oneDayData){
+            
+        }
     }
 })
 
