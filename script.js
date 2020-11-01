@@ -18,17 +18,23 @@ $(document).ready(function(){
         var cityName= search.val();
         var URL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
         var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey; 
-
+// ajax calls
         $.ajax({
             url: URL,
             method: "GET"
         }).then(function(oneDayData){
             var queryUV= "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude +apiKey;
             $.ajax({
-                url: fivedayForecast,
-                method: "GET",
-                
-            })
+                url: queryUV,
+                method: "GET"
+              }).then(function(uvData){
+                  $.ajax({
+                      url:fivedayForecast,
+                      method: "GET"
+                     }).then(function(fiveDayData){
+
+                     }
+              }
         }
     }
 })
