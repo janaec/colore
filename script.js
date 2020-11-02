@@ -35,7 +35,6 @@ $(document).ready(function () {
                     setCard(oneDayData);
                     setUV(uvData);
                     setFiveDay(fiveDayData);
-                    saveSearch();
                 })
             })
         }) 
@@ -52,5 +51,10 @@ function setCard(input) {
     }).appendTo(cityName);
     $(temperature).text("Temperature" + input.main.temp + "F");
     $(windSpeed).text("Wind Speed-" + input.wind.speed + "MPH");
-    
+}
+function setFiveDay(input){
+
+    for(var i=1; i< 6; i++) {
+        
+    }
 }
