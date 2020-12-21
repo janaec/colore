@@ -1,9 +1,11 @@
 // variables needed for functions and buttons
-var Search = $("#searchCity");
+var Search = $("#searchTerm");
 var apiKey = "5fee4097b9741407390bbe8f4c7afffc";
 var cityName = $("#cityName");
 var uvIndex = $("#uvIndex");
 var windSpeed = $("#windspeed");
+var humid= $("#humidity");
+var searchCity =search.val();
 var temperature = $("#temperature");
 var latitude = oneDayData.coord.lat;
 var longitude = oneDayData.coord.lon;
@@ -13,48 +15,15 @@ $(document).ready(function () {
 
     $(".btn").on("click", startSearch);
 
-
+    $(".previous").on("click","p", function(){
+        lastSearch = this.textContent;
+        localStorage.setItem("lastSearch", lastSearch);
+        Search.val(lastsearch);
+        startSearch();
+    })})
     function startSearch() {
-        var cityName = search.val();
-        var URL = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey + "&units=imperial";
-        var fivedayForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
-        // ajax calls
-        $.ajax({
-            url: URL,
-            method: "GET"
-        }).then(function (oneDayData) {
-            var queryUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + apiKey;
-            $.ajax({
-                url: queryUV,
-                method: "GET"
-            }).then(function (uvData) {
-                $.ajax({
-                    url: fivedayForecast,
-                    method: "GET"
-                }).then(function (fiveDayData) {
-                    setCard(oneDayData);
-                    setUV(uvData);
-                    setFiveDay(fiveDayData);
-                })
-            })
-        }) 
-    }),
-}
-
-function setCard(input) {
-    var icon = input.weather[0].icon;
-    var iconURL = "http://openweathermap.org/img/w/" + icon +".png";
-    $(cityName).text(input.name + "(" + moment().format('1') + ")");
-    $("<img>",{
-        src: iconURL,
-        alt: "icon"
-    }).appendTo(cityName);
-    $(temperature).text("Temperature" + input.main.temp + "F");
-    $(windSpeed).text("Wind Speed-" + input.wind.speed + "MPH");
-}
-function setFiveDay(input){
-
-    for(var i=1; i< 6; i++) {
+        lastSearch = searchCity;
+        localStorage.setItem("lastSearch", lastSearch);
+        var queryURL1=  "https://api.openweathermap.org/data/2.5/weather?q=" + seachCity + "&appid="+apiKey + "&units=imperial";
         
     }
-}
